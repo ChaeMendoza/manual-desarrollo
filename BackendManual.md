@@ -129,6 +129,9 @@ class MessageService:
 
 Adicional a eso crearemos nuestro archivo implementador, es muy importante que tengamos este archivo.
 
+Ruta del archivo:
+`microservices/entities_service/entity_app/adapters/impl`
+
 ```python
 from django.apps import apps
 from django.contrib.auth.models import User
@@ -242,3 +245,25 @@ urlpatterns = [
     path('messages/', MessageView.as_view(), name='messages'),
 ]
 ```
+
+### Paso 7: Confirmar cambios
+Una vez que ya hemos configurado los pasos del 1 al 6, necesitamos realizar las migraciones necesarias para efectuar los cambios.
+
+1. Primero, ejecutamos `docker ps` para visualizar los contenedores.
+2. Ingresamos en el contenedor modificado en este caso especifico `entity_service`. Para hacerlo debemos ejecutar el comando:
+
+```bash
+docker exec -it ID_CONTENEDOR /bin/bash
+```
+3. Dentro del contenedor ejecutamos el comando
+```bash
+python manage.py makemigrations
+```
+4. Por ultimo, ejecutamos el siguiente comando para confirmar los cambios de la migracion.
+```bash
+python manage.py migrate
+```
+## Conclusion
+Con estos pasos hemos creado nuestro modelo y las funciones basicas para poder enviar los mensajes a los supervisores desde el back. En la siguiente parte veremos como hacer las modificaciones en el front.
+
+Si hemos llegao hasta aqui quiere decir que no tenemos errores y ya podemos continuar.
